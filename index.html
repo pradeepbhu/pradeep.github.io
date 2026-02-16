@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pradeep Yadav - React Native Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0e27;
+            --color-bg-card: #141b3d;
+            --color-accent: #00ff87;
+            --color-accent-dim: #00cc6a;
+            --color-text: #e8edf5;
+            --color-text-dim: #8892a6;
+            --color-border: #1e2a52;
+            --font-display: 'Syne', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--color-border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: 0;
+            animation: gridSlide 20s linear infinite;
+        }
+
+        @keyframes gridSlide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 6rem;
+            position: relative;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 135, 0.1);
+            border: 1px solid var(--color-accent);
+            border-radius: 20px;
+            color: var(--color-accent);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .hero h1 .accent {
+            color: var(--color-accent);
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--color-text-dim);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease-out 0.8s backwards;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--color-text-dim);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 1s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-dim);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 135, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--color-accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            color: var(--color-text-dim);
+            max-width: 600px;
+            font-size: 1.1rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--color-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.4rem 0.8rem;
+            background: rgba(0, 255, 135, 0.1);
+            border: 1px solid rgba(0, 255, 135, 0.3);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--color-text);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            border-color: var(--color-accent);
+            transform: translateX(10px);
+        }
+
+        .project-content {
+            padding: 2.5rem;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-role {
+            color: var(--color-accent);
+            font-size: 0.9rem;
+        }
+
+        .project-badge {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .project-description {
+            color: var(--color-text-dim);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .project-highlights {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-highlights li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: var(--color-text-dim);
+        }
+
+        .project-highlights li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dim));
+        }
+
+        .contact-content h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-content p {
+            color: var(--color-text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item:hover {
+            color: var(--color-accent);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+            color: var(--color-text-dim);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">PY</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-label">🚀 Available for Opportunities</div>
+                    <h1>
+                        PRADEEP YADAV
+                        <span class="accent">React Native Developer</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Building production-grade mobile applications with 4+ years of experience. 
+                        Specialized in React Native, delivering apps with 1M+ downloads across education, 
+                        retail, and enterprise domains.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">4+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Apps Delivered</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">1M+</span>
+                            <span class="stat-label">Downloads</span>
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                        <a href="#projects" class="btn btn-secondary">View Projects</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <div class="section-label">Technical Expertise</div>
+                    <h2 class="section-title">Skills & Technologies</h2>
+                    <p class="section-description">
+                        Comprehensive experience across the mobile development stack, from architecture 
+                        to deployment.
+                    </p>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card fade-in">
+                        <h3>Core Technologies</h3>
+                        <div class="skill-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">JavaScript ES6+</span>
+                            <span class="tag">Redux</span>
+                            <span class="tag">Android</span>
+                            <span class="tag">iOS</span>
+                            <span class="tag">REST API</span>
+                        </div>
+                    </div>
+                    <div class="skill-card fade-in">
+                        <h3>Firebase & Backend</h3>
+                        <div class="skill-tags">
+                            <span class="tag">Firebase Auth</span>
+                            <span class="tag">Firestore</span>
+                            <span class="tag">Realtime Database</span>
+                            <span class="tag">Push Notifications</span>
+                            <span class="tag">SQLite</span>
+                        </div>
+                    </div>
+                    <div class="skill-card fade-in">
+                        <h3>Specialized Features</h3>
+                        <div class="skill-tags">
+                            <span class="tag">Payment Integration</span>
+                            <span class="tag">QR Code Systems</span>
+                            <span class="tag">Geolocation</span>
+                            <span class="tag">Geo-fencing</span>
+                            <span class="tag">Facial Recognition</span>
+                        </div>
+                    </div>
+                    <div class="skill-card fade-in">
+                        <h3>Development Tools</h3>
+                        <div class="skill-tags">
+                            <span class="tag">Git</span>
+                            <span class="tag">Azure DevOps</span>
+                            <span class="tag">Android Studio</span>
+                            <span class="tag">Xcode</span>
+                            <span class="tag">VS Code</span>
+                            <span class="tag">Postman</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <div class="section-label">Portfolio</div>
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-description">
+                        A selection of high-impact mobile applications spanning retail, education, and HR domains.
+                    </p>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card fade-in">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <div>
+                                    <h3 class="project-title">Club Apparel</h3>
+                                    <div class="project-role">Android Developer (Kotlin) / Mobile Developer</div>
+                                </div>
+                                <div class="project-badge">1M+ Downloads</div>
+                            </div>
+                            <p class="project-description">
+                                Digital loyalty and retail application serving over 1 million users with 
+                                comprehensive reward tracking and in-store experiences.
+                            </p>
+                            <ul class="project-highlights">
+                                <li>Owned complete store-side flow with QR-based in-store user journeys</li>
+                                <li>Implemented reward points tracking, expiry timelines, and personalized coupons</li>
+                                <li>Built QR-based shopping assistant and virtual brand catalog</li>
+                                <li>Integrated Firebase push notifications for user engagement</li>
+                                <li>Collaborated with backend and iOS teams for feature alignment</li>
+                            </ul>
+                            <div class="project-tech">
+                                <span class="tag">Kotlin</span>
+                                <span class="tag">QR Integration</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">Loyalty Programs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <div>
+                                    <h3 class="project-title">eLite SIS K12</h3>
+                                    <div class="project-role">Sole React Native Developer</div>
+                                </div>
+                                <div class="project-badge">Featured</div>
+                            </div>
+                            <p class="project-description">
+                                Large-scale education ERP platform used across multiple institutions, 
+                                providing comprehensive school management capabilities.
+                            </p>
+                            <ul class="project-highlights">
+                                <li>Student & teacher attendance via facial recognition and QR scanning</li>
+                                <li>Geo-location & geo-fencing based validation systems</li>
+                                <li>Real-time school bus tracking with SOS alerts</li>
+                                <li>Complete homework, schedules, academics, and fee payment workflows</li>
+                                <li>Multi-role communication platform for parents, teachers, and administrators</li>
+                                <li>Solely maintained and evolved for 2+ years with 1,000+ downloads</li>
+                            </ul>
+                            <div class="project-tech">
+                                <span class="tag">React Native</span>
+                                <span class="tag">Redux</span>
+                                <span class="tag">Facial Recognition</span>
+                                <span class="tag">Geolocation</span>
+                                <span class="tag">Real-time Tracking</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <div>
+                                    <h3 class="project-title">Epselit - Emirates Private School</h3>
+                                    <div class="project-role">Sole React Native Developer</div>
+                                </div>
+                                <div class="project-badge">International</div>
+                            </div>
+                            <p class="project-description">
+                                Mobile ERP application designed for an international school in Abu Dhabi, UAE, 
+                                providing comprehensive school management features.
+                            </p>
+                            <ul class="project-highlights">
+                                <li>Attendance, academics, and fee management modules</li>
+                                <li>Parent-teacher communication platform</li>
+                                <li>Secure authentication and role-based access control</li>
+                                <li>API-driven workflows with Firebase real-time updates</li>
+                                <li>Production-ready Android & iOS deployment</li>
+                            </ul>
+                            <div class="project-tech">
+                                <span class="tag">React Native</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">REST API</span>
+                                <span class="tag">Role-based Access</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <div>
+                                    <h3 class="project-title">eLite Bam HR</h3>
+                                    <div class="project-role">Lead React Native Developer</div>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                Comprehensive HR management system with advanced attendance tracking and 
+                                employee management capabilities.
+                            </p>
+                            <ul class="project-highlights">
+                                <li>Employee attendance via QR scanning and facial recognition</li>
+                                <li>Geo-location and geo-fencing validation to prevent proxy attendance</li>
+                                <li>Leave management, claims, and expense tracking</li>
+                                <li>Real-time notifications and circulars distribution</li>
+                                <li>Integrated REST APIs and Firebase for secure data handling</li>
+                            </ul>
+                            <div class="project-tech">
+                                <span class="tag">React Native</span>
+                                <span class="tag">Facial Recognition</span>
+                                <span class="tag">Geo-fencing</span>
+                                <span class="tag">Firebase</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <div>
+                                    <h3 class="project-title">Saraswati Education Group</h3>
+                                    <div class="project-role">Sole React Native Developer</div>
+                                </div>
+                                <div class="project-badge">5K+ Downloads</div>
+                            </div>
+                            <p class="project-description">
+                                School ERP mobile application serving a large educational institution with 
+                                over 5,000 downloads.
+                            </p>
+                            <ul class="project-highlights">
+                                <li>Attendance, academics, and homework management modules</li>
+                                <li>Fee payment integration and notifications</li>
+                                <li>Secure authentication with role-based access for students, parents, and staff</li>
+                                <li>REST API and Firebase integration for real-time updates</li>
+                                <li>Production-ready deployment on both platforms</li>
+                            </ul>
+                            <div class="project-tech">
+                                <span class="tag">React Native</span>
+                                <span class="tag">Redux</span>
+                                <span class="tag">Payment Gateway</span>
+                                <span class="tag">Firebase</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="contact-content fade-in">
+                    <h2>Let's Work Together</h2>
+                    <p>
+                        I'm currently open to new opportunities, freelance projects, and international relocations. 
+                        Let's discuss how I can contribute to your team.
+                    </p>
+                    <div class="contact-info">
+                        <a href="mailto:info.pradeepydv@gmail.com" class="contact-item">
+                            📧 info.pradeepydv@gmail.com
+                        </a>
+                        <a href="tel:+917309265212" class="contact-item">
+                            📱 +91 7309265212
+                        </a>
+                        <a href="https://www.linkedin.com/in/pradeep-yadav-b08410182" target="_blank" class="contact-item">
+                            💼 LinkedIn Profile
+                        </a>
+                        <div class="contact-item">
+                            📍 Noida, India (Open to Relocation)
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="mailto:info.pradeepydv@gmail.com" class="btn btn-primary">Send Email</a>
+                        <a href="https://www.linkedin.com/in/pradeep-yadav-b08410182" target="_blank" class="btn btn-secondary">Connect on LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Pradeep Yadav. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">React Native Developer | Mobile Applications Specialist</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
