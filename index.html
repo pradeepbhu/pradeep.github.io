@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pradeep Yadav - React Native Developer</title>
+    <title>Pradeep Yadav - Mobile Application Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -56,9 +56,9 @@
         .container {
             position: relative;
             z-index: 1;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 6rem;
         }
 
         /* Header */
@@ -85,6 +85,27 @@
             color: var(--color-accent);
             text-transform: uppercase;
             letter-spacing: 2px;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--color-accent);
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
         }
 
         .nav-links {
@@ -120,10 +141,14 @@
             width: 100%;
         }
 
-        /* Hero Section */
+        /* Hero Section with Phone Mockups */
         .hero {
-            padding: 8rem 0 6rem;
+            padding: 8rem 5rem 6rem;
             position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
 
         .hero-content {
@@ -155,7 +180,7 @@
 
         .hero h1 {
             font-family: var(--font-display);
-            font-size: 5rem;
+            font-size: 4rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
@@ -167,11 +192,18 @@
             display: block;
         }
 
+        .hero h1 .tech-stack {
+            font-size: 1.2rem;
+            color: var(--color-text-dim);
+            font-weight: 400;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
         .hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--color-text-dim);
             margin-bottom: 2rem;
-            max-width: 600px;
             animation: fadeInUp 1s ease-out 0.6s backwards;
         }
 
@@ -239,6 +271,234 @@
         .btn-secondary:hover {
             border-color: var(--color-accent);
             color: var(--color-accent);
+        }
+
+        /* Phone Mockups Container */
+        .phones-container {
+            position: relative;
+            height: 600px;
+            animation: fadeInRight 1s ease-out 0.5s backwards;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Individual Phone Mockup */
+        .phone {
+            position: absolute;
+            width: 280px;
+            height: 570px;
+            background: #1a1a1a;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .phone:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .phone-1 {
+            top: 0;
+            left: 0;
+            z-index: 3;
+            animation: floatPhone1 6s ease-in-out infinite;
+        }
+
+        .phone-2 {
+            top: 80px;
+            left: 140px;
+            z-index: 2;
+            animation: floatPhone2 6s ease-in-out infinite 1s;
+        }
+
+        .phone-3 {
+            top: 160px;
+            left: 280px;
+            z-index: 1;
+            animation: floatPhone3 6s ease-in-out infinite 2s;
+        }
+
+        @keyframes floatPhone1 {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(-2deg); }
+        }
+
+        @keyframes floatPhone2 {
+            0%, 100% { transform: translateY(0) rotate(1deg); }
+            50% { transform: translateY(-25px) rotate(1deg); }
+        }
+
+        @keyframes floatPhone3 {
+            0%, 100% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-30px) rotate(-1deg); }
+        }
+
+        /* Phone Screen */
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Notch */
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 28px;
+            background: #1a1a1a;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+
+        /* App Screen Content */
+        .app-content {
+            padding: 50px 20px 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            animation: slideUpScreen 1s ease-out;
+        }
+
+        @keyframes slideUpScreen {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* App Header */
+        .app-header {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .app-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .app-subtitle {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* App Cards */
+        .app-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow: hidden;
+        }
+
+        .app-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 15px;
+            color: white;
+            animation: fadeInCard 0.5s ease-out backwards;
+        }
+
+        .app-card:nth-child(1) { animation-delay: 0.2s; }
+        .app-card:nth-child(2) { animation-delay: 0.4s; }
+        .app-card:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .card-text {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        /* Different phone themes */
+        .phone-1 .phone-screen {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .phone-2 .phone-screen {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .phone-3 .phone-screen {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* App Icons Grid */
+        .app-icons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: auto;
+            padding: 20px 10px;
+        }
+
+        .app-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: popIn 0.3s ease-out backwards;
+        }
+
+        .app-icon:nth-child(1) { animation-delay: 0.8s; }
+        .app-icon:nth-child(2) { animation-delay: 0.9s; }
+        .app-icon:nth-child(3) { animation-delay: 1s; }
+        .app-icon:nth-child(4) { animation-delay: 1.1s; }
+        .app-icon:nth-child(5) { animation-delay: 1.2s; }
+        .app-icon:nth-child(6) { animation-delay: 1.3s; }
+        .app-icon:nth-child(7) { animation-delay: 1.4s; }
+        .app-icon:nth-child(8) { animation-delay: 1.5s; }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         /* Section Styles */
@@ -480,9 +740,68 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
+            .hero {
+                padding: 6rem 3rem 4rem;
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
             .hero h1 {
-                font-size: 3rem;
+                font-size: 3.5rem;
+            }
+
+            .phones-container {
+                height: 450px;
+                margin: 0 auto;
+                max-width: 600px;
+            }
+
+            .phone {
+                width: 220px;
+                height: 450px;
+            }
+
+            .phone-1 {
+                left: 20px;
+            }
+
+            .phone-2 {
+                left: 140px;
+            }
+
+            .phone-3 {
+                left: 260px;
+            }
+
+            .container {
+                padding: 0 4rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .app-title {
+                font-size: 1.1rem;
+            }
+
+            .app-icon {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 2.5rem;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero h1 .tech-stack {
+                font-size: 1rem;
             }
 
             .section-title {
@@ -490,12 +809,26 @@
             }
 
             .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .stat {
+                flex: 1;
+                min-width: 100px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
             }
 
             .nav-links {
                 display: none;
+            }
+
+            .logo {
+                font-size: 1.2rem;
             }
 
             .skills-grid {
@@ -504,6 +837,182 @@
 
             .cta-buttons {
                 flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .phones-container {
+                height: 350px;
+                overflow: visible;
+            }
+
+            .phone {
+                width: 160px;
+                height: 330px;
+                padding: 8px;
+            }
+
+            .phone-screen {
+                border-radius: 28px;
+            }
+
+            .phone-1 {
+                left: 10px;
+                top: 10px;
+            }
+
+            .phone-2 {
+                left: 90px;
+                top: 60px;
+            }
+
+            .phone-3 {
+                left: 170px;
+                top: 110px;
+            }
+
+            .app-content {
+                padding: 40px 15px 15px;
+            }
+
+            .app-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1.1rem;
+            }
+
+            .app-icons {
+                gap: 10px;
+                padding: 15px 5px;
+            }
+
+            .app-title {
+                font-size: 0.95rem;
+            }
+
+            .app-subtitle {
+                font-size: 0.7rem;
+            }
+
+            .card-title {
+                font-size: 0.75rem;
+            }
+
+            .card-text {
+                font-size: 0.65rem;
+            }
+
+            .app-card {
+                padding: 12px;
+            }
+
+            .app-cards {
+                gap: 8px;
+            }
+
+            .notch {
+                width: 100px;
+                height: 24px;
+            }
+
+            .project-card {
+                transform: none !important;
+            }
+
+            .project-card:hover {
+                transform: translateY(-5px) !important;
+            }
+
+            .contact-content {
+                padding: 3rem 1.5rem;
+            }
+
+            .contact-content h2 {
+                font-size: 2rem;
+            }
+
+            header {
+                padding: 1.5rem 0;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .hero {
+                padding: 4rem 2rem 3rem;
+            }
+
+            .section-header {
+                margin-bottom: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .phones-container {
+                height: 280px;
+            }
+
+            .phone {
+                width: 130px;
+                height: 270px;
+            }
+
+            .phone-1 {
+                left: 5px;
+                top: 5px;
+            }
+
+            .phone-2 {
+                left: 70px;
+                top: 40px;
+            }
+
+            .phone-3 {
+                left: 135px;
+                top: 75px;
+            }
+
+            .app-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.95rem;
+            }
+
+            .app-icons {
+                gap: 8px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .project-title {
+                font-size: 1.4rem;
             }
         }
 
@@ -532,40 +1041,156 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="menu-toggle" onclick="alert('Menu navigation works best on desktop. Use the buttons below to navigate on mobile!')">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-label">🚀 Available for Opportunities</div>
-                    <h1>
-                        PRADEEP YADAV
-                        <span class="accent">React Native Developer</span>
-                    </h1>
-                    <p class="hero-subtitle">
-                        Building production-grade mobile applications with 4+ years of experience. 
-                        Specialized in React Native, delivering apps with 1M+ downloads across education, 
-                        retail, and enterprise domains.
-                    </p>
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <span class="stat-number">4+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">Apps Delivered</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">1M+</span>
-                            <span class="stat-label">Downloads</span>
+            <div class="hero-content">
+                <div class="hero-label">📱 Mobile Application Developer</div>
+                <h1>
+                    PRADEEP YADAV
+                    <span class="accent">Mobile App Developer</span>
+                    <span class="tech-stack">React Native • Kotlin • Android • iOS</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Crafting exceptional mobile experiences with 4+ years of expertise in React Native and Kotlin. 
+                    Delivering production-grade apps with 1M+ downloads across education, retail, and enterprise domains.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">4+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Apps Delivered</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">1M+</span>
+                        <span class="stat-label">Downloads</span>
+                    </div>
+                </div>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#projects" class="btn btn-secondary">View Projects</a>
+                </div>
+            </div>
+
+            <div class="phones-container">
+                <!-- Phone 1 - Education App -->
+                <div class="phone phone-1">
+                    <div class="phone-screen">
+                        <div class="notch"></div>
+                        <div class="app-content">
+                            <div class="app-header">
+                                <div class="app-title">eLite SIS K12</div>
+                                <div class="app-subtitle">Education Management</div>
+                            </div>
+                            <div class="app-cards">
+                                <div class="app-card">
+                                    <div class="card-title">📚 Attendance</div>
+                                    <div class="card-text">Facial recognition & QR scanning</div>
+                                </div>
+                                <div class="app-card">
+                                    <div class="card-title">🚌 Bus Tracking</div>
+                                    <div class="card-text">Real-time location & SOS alerts</div>
+                                </div>
+                                <div class="app-card">
+                                    <div class="card-title">💰 Fee Payment</div>
+                                    <div class="card-text">Secure online transactions</div>
+                                </div>
+                            </div>
+                            <div class="app-icons">
+                                <div class="app-icon">👨‍🎓</div>
+                                <div class="app-icon">📖</div>
+                                <div class="app-icon">📊</div>
+                                <div class="app-icon">💬</div>
+                                <div class="app-icon">🔔</div>
+                                <div class="app-icon">📅</div>
+                                <div class="app-icon">🎯</div>
+                                <div class="app-icon">⚙️</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="cta-buttons">
-                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                        <a href="#projects" class="btn btn-secondary">View Projects</a>
+                </div>
+
+                <!-- Phone 2 - Retail App -->
+                <div class="phone phone-2">
+                    <div class="phone-screen">
+                        <div class="notch"></div>
+                        <div class="app-content">
+                            <div class="app-header">
+                                <div class="app-title">Club Apparel</div>
+                                <div class="app-subtitle">Digital Loyalty</div>
+                            </div>
+                            <div class="app-cards">
+                                <div class="app-card">
+                                    <div class="card-title">🎁 Rewards</div>
+                                    <div class="card-text">Track points & exclusive offers</div>
+                                </div>
+                                <div class="app-card">
+                                    <div class="card-title">🔍 QR Shopping</div>
+                                    <div class="card-text">In-store assistant & catalog</div>
+                                </div>
+                                <div class="app-card">
+                                    <div class="card-title">🏷️ Coupons</div>
+                                    <div class="card-text">Personalized brand deals</div>
+                                </div>
+                            </div>
+                            <div class="app-icons">
+                                <div class="app-icon">🛍️</div>
+                                <div class="app-icon">💳</div>
+                                <div class="app-icon">🎫</div>
+                                <div class="app-icon">📱</div>
+                                <div class="app-icon">⭐</div>
+                                <div class="app-icon">🔍</div>
+                                <div class="app-icon">🎨</div>
+                                <div class="app-icon">👤</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone 3 - HR App -->
+                <div class="phone phone-3">
+                    <div class="phone-screen">
+                        <div class="notch"></div>
+                        <div class="app-content">
+                            <div class="app-header">
+                                <div class="app-title">eLite Bam HR</div>
+                                <div class="app-subtitle">HR Management</div>
+                            </div>
+                            <div class="app-cards">
+                                <div class="app-card">
+                                    <div class="card-title">✅ Check-In</div>
+                                    <div class="card-text">QR & facial recognition</div>
+                                </div>
+                                <div class="app-card">
+                                    <div class="card-title">📍 Geo-Fencing</div>
+                                    <div class="card-text">Location-based validation</div>
+                                </div>
+                                <div class="app-card">
+                                    <div class="card-title">🏖️ Leave & Claims</div>
+                                    <div class="card-text">Easy request management</div>
+                                </div>
+                            </div>
+                            <div class="app-icons">
+                                <div class="app-icon">👔</div>
+                                <div class="app-icon">📋</div>
+                                <div class="app-icon">💼</div>
+                                <div class="app-icon">📈</div>
+                                <div class="app-icon">🕒</div>
+                                <div class="app-icon">📨</div>
+                                <div class="app-icon">💵</div>
+                                <div class="app-icon">🔐</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -586,6 +1211,7 @@
                         <h3>Core Technologies</h3>
                         <div class="skill-tags">
                             <span class="tag">React Native</span>
+                            <span class="tag">Kotlin</span>
                             <span class="tag">JavaScript ES6+</span>
                             <span class="tag">Redux</span>
                             <span class="tag">Android</span>
@@ -796,8 +1422,8 @@
                         Let's discuss how I can contribute to your team.
                     </p>
                     <div class="contact-info">
-                        <a href="mailto:info.pradeepydv@gmail.com" class="contact-item">
-                            📧 info.pradeepydv@gmail.com
+                        <a href="/cdn-cgi/l/email-protection#80e9eee6efaef0f2e1e4e5e5f0f9e4f6c0e7ede1e9ecaee3efed" class="contact-item">
+                            📧 <span class="__cf_email__" data-cfemail="6f06010900411f1d0e0b0a0a1f160b192f08020e0603410c0002">[email&#160;protected]</span>
                         </a>
                         <a href="tel:+917309265212" class="contact-item">
                             📱 +91 7309265212
@@ -810,7 +1436,7 @@
                         </div>
                     </div>
                     <div class="cta-buttons">
-                        <a href="mailto:info.pradeepydv@gmail.com" class="btn btn-primary">Send Email</a>
+                        <a href="/cdn-cgi/l/email-protection#e68f888089c8969487828383969f8290a6818b878f8ac885898b" class="btn btn-primary">Send Email</a>
                         <a href="https://www.linkedin.com/in/pradeep-yadav-b08410182" target="_blank" class="btn btn-secondary">Connect on LinkedIn</a>
                     </div>
                 </div>
@@ -821,11 +1447,11 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Pradeep Yadav. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.85rem;">React Native Developer | Mobile Applications Specialist</p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">Mobile Application Developer | React Native & Kotlin Specialist</p>
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Scroll animation observer
         const observerOptions = {
             threshold: 0.1,
@@ -848,10 +1474,7 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
